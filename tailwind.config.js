@@ -1,8 +1,9 @@
-import { defineConfig } from 'vite'
-import react       from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
+// tailwind.config.js
+module.exports = {
+  content: [
+    './index.html',
+    './src/**/*.{js,jsx,ts,tsx}',
+  ],
   theme: {
     extend: {
       colors: {
@@ -18,24 +19,13 @@ export default defineConfig({
         sans: ['Inter', 'sans-serif'],
       },
       borderRadius: {
-        lg: '12px',
-        '2xl': '20px',
+        lg:  '12px',
+        '2xl':'20px',
       },
       boxShadow: {
         md: '0 4px 6px rgba(0,0,0,0.5)',
-      }
-    }
+      },
+    },
   },
-  server: {
-    host: '0.0.0.0',
-    port: 5173,
-    strictPort: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, ''),
-      }
-    }
-  }
-})
+  plugins: [],
+};
