@@ -1,0 +1,312 @@
+/* ================== global.css ================== */
+
+/* Variables de color para modo claro y modo oscuro /
+/ Modo claro */
+:root {
+--bg-page: #f5f5f5;
+--bg-card: #ffffff;
+--text-primary: #141A1F;
+--text-secondary: #4a4a4a;
+--bg-input: #e0e0e0;
+--progress-bg: #e5e5e5;
+}
+
+.dark {
+/* Modo oscuro */
+--bg-page: #141A1F;
+--bg-card: #283640;
+--text-primary: #ffffff;
+--text-secondary: #9EADBF;
+--bg-input: #283640;
+--progress-bg: #2B3640;
+}
+
+/* Base */
+body {
+margin: 0;
+font-family: 'Poppins', sans-serif;
+background: var(--bg-page);
+color: var(--text-primary);
+-webkit-font-smoothing: antialiased;
+}
+
+a {
+color: var(--text-primary);
+}
+
+/* Splash */
+.splash {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+min-height: 100vh;
+padding: 2rem 1rem;
+background: var(--bg-page);
+box-sizing: border-box;
+text-align: center;
+}
+
+.splash .graphic {
+width: 100%;
+max-width: 480px;
+border-radius: 1rem;
+overflow: hidden;
+margin-bottom: 1.5rem;
+}
+.splash .graphic img {
+width: 100%;
+height: auto;
+display: block;
+object-fit: cover;
+}
+
+.splash h1 {
+font-size: 1.875rem;
+font-weight: 700;
+line-height: 1.2;
+margin: 0 0 0.75rem;
+}
+
+.splash p {
+font-size: 1rem;
+font-weight: 400;
+color: var(--text-secondary);
+line-height: 1.5;
+margin: 0 0 2rem;
+max-width: 440px;
+}
+
+.splash .actions {
+width: 100%;
+max-width: 440px;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+margin-bottom: 1.5rem;
+}
+
+.splash .btn-primary,
+.splash .btn-secondary {
+height: 3rem;
+border-radius: 1.5rem;
+font-size: 1rem;
+font-weight: 600;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+border: none;
+transition: background-color 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+
+.splash .btn-primary {
+background: #DBE8F2;
+color: #141A1F;
+}
+
+.splash .btn-secondary {
+background: #2B3640;
+color: #FFFFFF;
+}
+
+.splash .legal {
+font-size: 0.75rem;
+color: #9EADBF;
+margin-top: auto;
+padding-bottom: 1rem;
+}
+
+/* Login/Register */
+.header {
+background: var(--bg-page);
+padding: 1rem;
+}
+.back-btn {
+width: 2.5rem;
+height: 2.5rem;
+background: var(--bg-input);
+border-radius: 50%;
+color: var(--text-primary);
+font-size: 1.25rem;
+border: none;
+cursor: pointer;
+}
+
+.login-page,
+.register-page {
+background: var(--bg-page);
+color: var(--text-primary);
+min-height: calc(100vh - 4rem);
+padding: 2rem 1.5rem;
+box-sizing: border-box;
+}
+
+.login-page h2,
+.register-page h2 {
+margin: 0;
+font-size: 1.75rem;
+font-weight: 700;
+color: var(--text-primary);
+}
+
+.login-page label,
+.register-page label {
+display: block;
+margin-top: 1.5rem;
+font-size: 1rem;
+font-weight: 600;
+color: var(--text-primary);
+}
+
+.login-page input,
+.register-page input {
+width: 100%;
+padding: 0.75rem;
+margin-top: 0.5rem;
+border: none;
+border-radius: 0.75rem;
+background: var(--bg-input);
+color: var(--text-primary);
+font-size: 1rem;
+box-sizing: border-box;
+transition: background-color 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+
+.login-page input::placeholder,
+.register-page input::placeholder {
+color: var(--text-secondary);
+}
+
+.forgot-link {
+display: block;
+margin-top: 0.5rem;
+text-align: right;
+font-size: 0.9rem;
+color: #1E90FF;
+text-decoration: none;
+}
+
+.btn-full {
+width: 100%;
+height: 3rem;
+margin-top: 1.25rem;
+border: none;
+border-radius: 1.5rem;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: background-color 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+
+.btn-full.primary {
+background: #DBE8F2;
+color: #141A1F;
+}
+
+.btn-full.secondary {
+background: var(--bg-input);
+color: var(--text-primary);
+}
+
+.btn-full:hover {
+filter: brightness(0.9);
+}
+
+input:focus,
+.btn-full:focus,
+.splash .btn-primary:focus,
+.splash .btn-secondary:focus {
+outline: none;
+box-shadow: 0 0 0 2px #1E90FF;
+}
+
+/* Progress bar común */
+.progress-track {
+background: var(--progress-bg);
+border-radius: 999px;
+height: 0.75rem;
+overflow: hidden;
+}
+
+.progress-fill {
+height: 100%;
+transition: width 300ms ease;
+}
+
+/* Toggle switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px; height: 24px;
+}
+.switch input { display: none; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background: #ccc; border-radius: 24px;
+  top: 0; left: 0; right: 0; bottom: 0;
+  transition: .3s;
+}
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 20px; width: 20px;
+  left: 2px; bottom: 2px;
+  background: white; border-radius: 50%;
+  transition: .3s;
+}
+input:checked + .slider {
+  background: #4caf50;
+}
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* Empty state como tarjeta */
+.empty-state-card {
+  background: var(--bg-card);
+  padding: 2rem 1.5rem;
+  margin: 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px; /* o lo que necesites */
+}
+
+.empty-title {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.empty-btn {
+  max-width: 200px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 1rem;
+  /* ... otros estilos .card ... */
+}
+
+.progress-track {
+  background: rgba(255, 255, 255, 0.15); /* antes: var(--progress-bg) */
+  border-radius: 999px;
+  height: 0.75rem;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 300ms ease;
+}
