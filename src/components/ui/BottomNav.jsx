@@ -1,12 +1,12 @@
-import { NavLink } from 'react-router-dom'
-import { Home, List, PlusCircle, User } from 'lucide-react'
+import { NavLink } from 'react-router-dom';
+import { Home, List, PlusCircle, User } from 'lucide-react';
 
 const items = [
-  { to: '/',       icon: <Home />,         label: 'Home' },
-  { to: '/goals',  icon: <List />,         label: 'Goals' },
-  { to: '/goals/create', icon: <PlusCircle />, label: 'Add' },
-  { to: '/profile', icon: <User />,         label: 'Profile' },
-]
+  { to: '/',             icon: <Home size={24} />,        label: 'Home' },
+  { to: '/goals',        icon: <List size={24} />,        label: 'Goals' },
+  { to: '/goals/create', icon: <PlusCircle size={24} />,  label: 'Add' },
+  { to: '/profile',      icon: <User size={24} />,        label: 'Profile' },
+];
 
 export default function BottomNav() {
   return (
@@ -15,12 +15,16 @@ export default function BottomNav() {
         <NavLink
           key={to}
           to={to}
-          className="flex flex-col items-center text-text-secondary hover:text-primary"
+          className={({ isActive }) =>
+            `flex flex-col items-center text-xs ${
+              isActive ? 'text-primary' : 'text-text-secondary'
+            }`
+          }
         >
           {icon}
-          <span className="text-xs">{label}</span>
+          <span>{label}</span>
         </NavLink>
       ))}
     </nav>
-  )
+  );
 }
