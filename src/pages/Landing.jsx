@@ -1,14 +1,13 @@
-// src/pages/Landing.tsx
+// src/pages/Landing.jsx
 import React from 'react';
 import Button from '../components/ui/Button';
 
 export default function Landing() {
   return (
     <div className="bg-background min-h-screen flex flex-col items-center justify-center px-6">
-      {/* (sin logo/pill) */}
-
       <h1 className="text-3xl font-semibold text-center text-text-primary mb-2">
-        Planifica tu futuro<br />
+        Planifica tu futuro
+        <br />
         <span className="text-primary">financiero</span>
       </h1>
       <p className="text-base text-text-secondary text-center mb-8 px-4">
