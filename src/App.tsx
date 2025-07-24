@@ -1,13 +1,18 @@
 // src/App.tsx
-
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useLocation
+} from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './hooks/useAuth';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
-import BottomNav from './components/ui/BottomNav';
 import Header from './components/ui/Header';
+import BottomNav from './components/ui/BottomNav';
 
 import Landing from './pages/Landing';
 import Login from './pages/auth/Login';
@@ -26,10 +31,10 @@ const queryClient = new QueryClient({
   },
 });
 
-// Un wrapper para poder usar useLocation y condicionar el Header
 function AppLayout() {
   const [healthStatus, setHealthStatus] = useState('—');
-  const location = useLocation();
+  const { pathname } = useLocation();
+  const isLanding = pathname === '/';
 
   const checkHealth = async () => {
     try {
@@ -42,21 +47,23 @@ function AppLayout() {
 
   return (
     <div className="bg-background text-text-primary min-h-screen flex flex-col">
-      {/* Header solo si no estamos en "/" */}
-      {location.pathname !== '/' && <Header />}
+      {/* Header sólo si no es Landing */}
+      {!isLanding && <Header />}
 
-      {/* Health‑check (puedes quitarlo en producción) */}
-      <div className="px-4 py-2 bg-surface flex justify-between items-center">
-        <span className="text-sm">API status: {healthStatus}</span>
-        <button
-          onClick={checkHealth}
-          className="text-sm px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
-        >
-          Check API
-        </button>
-      </div>
+      {/* Health-check sólo si no es Landing */}
+      {!isLanding && (
+        <div className="px-4 py-2 bg-surface flex justify-between items-center">
+          <span className="text-sm">API status: {healthStatus}</span>
+          <button
+            onClick={checkHealth}
+            className="text-sm px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+          >
+            Check API
+          </button>
+        </div>
+      )}
 
-      {/* Contenido principal */}
+      {/* Zona de rutas */}
       <div className="flex-1 overflow-auto">
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -94,13 +101,13 @@ function AppLayout() {
               </ProtectedRoute>
             }
           />
-          
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
 
-      {/* Navegación inferior */}
-      <BottomNav />
+      {/* BottomNav sólo si no es Landing */}
+      {!isLanding && <BottomNav />}
     </div>
   );
 }
