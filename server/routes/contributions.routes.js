@@ -267,7 +267,7 @@ router.get('/goal/:goalId/analytics',
       (monthlyContributions.length / Math.max(1, months)) * 100 : 0;
 
     // Calculate growth rate
-    const sortedContributions = contributions.sort((a, b) => new Date(a.contribution_date) - new Date(b.contribution_date);
+    const sortedContributions = contributions.sort((a, b) =>new Date(a.contribution_date) - new Date(b.contribution_date));
     const firstHalf = sortedContributions.slice(0, Math.floor(sortedContributions.length / 2));
     const secondHalf = sortedContributions.slice(Math.floor(sortedContributions.length / 2));
     
