@@ -5,8 +5,6 @@ import Button from '../components/ui/Button';
 export default function Landing() {
   return (
     <div className="bg-background min-h-screen flex flex-col items-center justify-center px-6">
-
-      {/* Titular */}
       <h1 className="text-2xl font-semibold text-center text-text-primary mb-2">
         Planifica tu futuro<br/>
         <span className="text-primary">financiero</span>
