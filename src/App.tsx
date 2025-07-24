@@ -1,4 +1,5 @@
 // src/App.tsx
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -6,7 +7,7 @@ import { AuthProvider } from './hooks/useAuth';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import BottomNav from './components/ui/BottomNav';
-import Header    from './components/ui/Header';
+import Header from './components/ui/Header';
 
 import Landing from './pages/Landing';
 import Login from './pages/auth/Login';
@@ -42,6 +43,11 @@ function App() {
       <AuthProvider>
         <Router>
           <div className="bg-background text-text-primary min-h-screen flex flex-col">
+            
+            {/* Cabecera con enlaces de ayuda, login y registro */}
+            <Header />
+
+            {/* Health‑check (solo en desarrollo) */}
             <div className="px-4 py-2 bg-surface flex justify-between items-center">
               <span className="text-sm">API status: {healthStatus}</span>
               <button
@@ -52,6 +58,7 @@ function App() {
               </button>
             </div>
 
+            {/* Área de contenido principal */}
             <div className="flex-1 overflow-auto">
               <Routes>
                 <Route path="/" element={<Landing />} />
@@ -94,6 +101,7 @@ function App() {
               </Routes>
             </div>
 
+            {/* Navegación inferior fija */}
             <BottomNav />
           </div>
         </Router>
