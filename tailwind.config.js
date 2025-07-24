@@ -3,17 +3,14 @@ import react       from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  css: {
-    preprocessorOptions: {},
-  },
   theme: {
     extend: {
       colors: {
-        background: '#121212',
-        surface:    '#1E1E1E',
-        primary:    '#3B82F6',
-        secondary:  '#10B981',
-        error:      '#EF4444',
+        background:      '#121212',
+        surface:         '#1E1E1E',
+        primary:         '#3B82F6',
+        secondary:       '#10B981',
+        error:           '#EF4444',
         'text-primary':   '#FFFFFF',
         'text-secondary': '#A0A0A0',
       },
@@ -37,7 +34,7 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        rewrite: path => path.replace(/^\/api/, ''),
       }
     }
   }
