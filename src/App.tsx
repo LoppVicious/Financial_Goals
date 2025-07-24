@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './hooks/useAuth';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import BottomNav from './components/ui/BottomNav';
 import Header    from './components/ui/Header';
 
 import Landing from './pages/Landing';
