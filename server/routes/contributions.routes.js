@@ -121,7 +121,7 @@ router.get('/goal/:goalId/summary',
       totalAmount: parseFloat(stats.total_amount) || 0,
       totalContributions: parseInt(stats.total_contributions) || 0,
       averageAmount: parseFloat(stats.avg_amount) || 0,
-      largestContribution: await Contribution.fin dLargestContribution(goalId),
+      largestContribution: await Contribution.findLargestContribution(goalId),
       smallestContribution: await Contribution.findSmallestContribution(goalId),
       byType: {
         monthly: {
