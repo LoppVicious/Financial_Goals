@@ -5,14 +5,6 @@ import Button from '../components/ui/Button';
 export default function Landing() {
   return (
     <div className="bg-background min-h-screen flex flex-col items-center justify-center px-6">
-      {/* Hero image */}
-      <div className="w-full max-w-xs mb-8">
-        <img
-          src="/hero-plant.png"
-          alt="Planta y Fintech"
-          className="w-full rounded-2xl shadow-md"
-        />
-      </div>
 
       {/* Titular */}
       <h1 className="text-2xl font-semibold text-center text-text-primary mb-2">
