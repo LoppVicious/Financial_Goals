@@ -1,62 +1,42 @@
 // tailwind.config.js
-module.exports = {
-  content: [
-    './index.html',
-    './src/**/*.{js,jsx,ts,tsx}',
-  ],
+import { defineConfig } from 'vite'
+import react            from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
   theme: {
     extend: {
       colors: {
-        background: '#141A1F',   // App background
-        surface:    '#2B3640',   // "Iniciar sesión" button
-        accent:     '#DBE8F2',   // "Registrar" button
-        textSecondary: '#9EADBF', // small legal text
-        white:      '#FFFFFF',
+        background:      '#121212',
+        surface:         '#1E1E1E',
+        primary:         '#3B82F6',
+        secondary:       '#10B981',
+        error:           '#EF4444',
         'text-primary':   '#FFFFFF',
-        'text-secondary': '#9EADBF',
+        'text-secondary': '#A0A0A0',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
       borderRadius: {
-        lg:  '12px',
-        '2xl':'20px',
+        lg: '12px',
+        '2xl': '20px',
       },
       boxShadow: {
         md: '0 4px 6px rgba(0,0,0,0.5)',
-      },
-    },
+      }
+    }
   },
-  plugins: [],
-};
-```js
-// tailwind.config.js
-module.exports = {
-  content: [
-    './index.html',
-    './src/**/*.{js,jsx,ts,tsx}',
-  ],
-  theme: {
-    extend: {
-      colors: {
-        background: '#141A1E',
-        surface:    '#2B3640',
-        accent:     '#DBE8F2',
-        white:      '#FFFFFF',
-        'text-primary':   '#FFFFFF',      // siempre blanco
-        'text-secondary': '#DBE8F2',      // color de acento para texto secundario
-      },
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-      },
-      borderRadius: {
-        lg:  '12px',
-        '2xl':'20px',
-      },
-      boxShadow: {
-        md: '0 4px 6px rgba(0,0,0,0.5)',
-      },
-    },
-  },
-  plugins: [],
-};
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      }
+    }
+  }
+})
