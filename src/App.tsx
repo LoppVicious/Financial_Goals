@@ -39,23 +39,23 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        {/* Contenedor principal Dark */}
-        <div className="bg-background text-text-primary min-h-screen flex flex-col">
-          
-          {/* Health‑check minimal en background */}
-          <div className="px-4 py-2 bg-surface flex justify-between items-center">
-            <span className="text-sm">API status: {healthStatus}</span>
-            <button
-              onClick={checkHealth}
-              className="text-sm px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
-            >
-              Check API
-            </button>
-          </div>
+        <Router>
+          {/* Contenedor principal Dark */}
+          <div className="bg-background text-text-primary min-h-screen flex flex-col">
+            
+            {/* Health‑check minimal en background */}
+            <div className="px-4 py-2 bg-surface flex justify-between items-center">
+              <span className="text-sm">API status: {healthStatus}</span>
+              <button
+                onClick={checkHealth}
+                className="text-sm px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+              >
+                Check API
+              </button>
+            </div>
 
-          {/* Rutas */}
-          <div className="flex-1 overflow-auto">
-            <Router>
+            {/* Rutas */}
+            <div className="flex-1 overflow-auto">
               <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route path="/login" element={<Login />} />
@@ -97,12 +97,12 @@ function App() {
 
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
-            </Router>
-          </div>
+            </div>
 
-          {/* Navegación inferior */}
-          <BottomNav />
-        </div>
+            {/* Navegación inferior */}
+            <BottomNav />
+          </div>
+        </Router>
       </AuthProvider>
     </QueryClientProvider>
   );
