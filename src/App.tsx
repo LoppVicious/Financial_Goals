@@ -20,7 +20,7 @@ import './index.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { retry: 1, staleTime: 5 * 60_000 },
+    queries: { retry: 1, staleTime: 300_000 },
   },
 });
 
@@ -40,10 +40,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router>
-          {/* Contenedor principal Dark */}
           <div className="bg-background text-text-primary min-h-screen flex flex-col">
-            
-            {/* Health‑check minimal en background */}
             <div className="px-4 py-2 bg-surface flex justify-between items-center">
               <span className="text-sm">API status: {healthStatus}</span>
               <button
@@ -54,7 +51,6 @@ function App() {
               </button>
             </div>
 
-            {/* Rutas */}
             <div className="flex-1 overflow-auto">
               <Routes>
                 <Route path="/" element={<Landing />} />
@@ -72,7 +68,6 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path="/goals/create"
                   element={
@@ -83,7 +78,6 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path="/goals/:id"
                   element={
@@ -99,7 +93,6 @@ function App() {
               </Routes>
             </div>
 
-            {/* Navegación inferior */}
             <BottomNav />
           </div>
         </Router>
