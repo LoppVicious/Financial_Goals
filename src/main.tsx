@@ -1,6 +1,5 @@
-import './index.css';
+import './index.css';         // ← Esto carga tu Tailwind + base styles
 import React from 'react';
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
