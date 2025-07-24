@@ -1,13 +1,19 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: '0.0.0.0',
     port: 5173,
-    host: true,
-    strictPort: false, // Allow Vite to use a different port if 5173 is busy
-    open: true
+    strictPort: true,
+    proxy: {
+      // redirige todas las llamadas que empiecen por /api a tu Express
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   }
 })
