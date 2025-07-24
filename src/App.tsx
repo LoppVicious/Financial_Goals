@@ -16,7 +16,7 @@ import CreateGoal from './pages/goals/CreateGoal';
 import GoalDetail from './pages/goals/GoalDetail';
 
 import { api } from './services/api';
-import 'tailwindcss/tailwind.css';
+import './index.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
