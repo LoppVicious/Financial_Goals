@@ -1,13 +1,14 @@
 // src/App.tsx
 
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './hooks/useAuth';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import BottomNav from './components/ui/BottomNav';
 import Header from './components/ui/Header';
+
 
 import Landing from './pages/Landing';
 import Login from './pages/auth/Login';
