@@ -1,12 +1,14 @@
+// src/components/ui/Button.jsx
 const styles = {
-  primary:   'bg-primary text-white py-3 px-6 rounded-lg hover:bg-primary/90 transition',
-  secondary: 'bg-surface text-text-primary py-3 px-6 rounded-lg hover:bg-surface/90 transition'
-}
+  primary:   'bg-accent text-background',
+  secondary: 'bg-surface text-text-primary',
+};
 
-export default function Button({ variant = 'primary', children, ...props }) {
+export default function Button({ variant = 'primary', className = '', ...props }) {
   return (
-    <button className={styles[variant]} {...props}>
-      {children}
-    </button>
-  )
+    <button
+      className={`${styles[variant]} py-4 px-6 rounded-full transition hover:opacity-90 ${className}`}
+      {...props}
+    />
+  );
 }
