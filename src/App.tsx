@@ -9,7 +9,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import BottomNav from './components/ui/BottomNav';
 import Header from './components/ui/Header';
 
-
 import Landing from './pages/Landing';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -27,62 +26,93 @@ const queryClient = new QueryClient({
   },
 });
 
-function App() {
+// Un wrapper para poder usar useLocation y condicionar el Header
+function AppLayout() {
   const [healthStatus, setHealthStatus] = useState('—');
+  const location = useLocation();
 
-  // Componente wrapper para condicionar el Header
-  function WithOptionalHeader({ children }: { children: React.ReactNode }) {
-    const { pathname } = useLocation();
-    return (
-      <>
-        {pathname !== '/' && <Header />}   {/* solo en rutas distintas de "/" */}
-        {children}
-      </>
-    );
-  }
+  const checkHealth = async () => {
+    try {
+      const { data } = await api.get('/health');
+      setHealthStatus(`${data.status} @ ${new Date(data.timestamp).toLocaleTimeString()}`);
+    } catch {
+      setHealthStatus('ERROR');
+    }
+  };
 
+  return (
+    <div className="bg-background text-text-primary min-h-screen flex flex-col">
+      {/* Header solo si no estamos en "/" */}
+      {location.pathname !== '/' && <Header />}
+
+      {/* Health‑check (puedes quitarlo en producción) */}
+      <div className="px-4 py-2 bg-surface flex justify-between items-center">
+        <span className="text-sm">API status: {healthStatus}</span>
+        <button
+          onClick={checkHealth}
+          className="text-sm px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+        >
+          Check API
+        </button>
+      </div>
+
+      {/* Contenido principal */}
+      <div className="flex-1 overflow-auto">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/help" element={<Help />} />
+
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Dashboard />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/goals/create"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <CreateGoal />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/goals/:id"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <GoalDetail />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+
+      {/* Navegación inferior */}
+      <BottomNav />
+    </div>
+  );
+}
+
+export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router>
-          <div className="bg-background text-text-primary min-h-screen flex flex-col">
-            
-            <Routes>
-              <Route
-                path="/*"
-                element={
-                  <WithOptionalHeader>
-                    {/* Health-check */}
-                    <div className="px-4 py-2 bg-surface flex justify-between items-center">
-                      <span className="text-sm">API status: {healthStatus}</span>
-                      {/* lo podrías ocultar también en prod */}
-                      <button
-                        onClick={checkHealth}
-                        className="text-sm px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
-                      >
-                        Check API
-                      </button>
-                    </div>
-                    {/* Outlet con el resto de rutas */}
-                    <div className="flex-1 overflow-auto">
-                      <Routes>
-                        <Route path="/" element={<Landing />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/help" element={<Help />} />
-                        {/* Rutas protegidas... */}
-                      </Routes>
-                    </div>
-                    <BottomNav />
-                  </WithOptionalHeader>
-                }
-              />
-            </Routes>
-          </div>
+          <AppLayout />
         </Router>
       </AuthProvider>
     </QueryClientProvider>
   );
 }
-
-export default App;
